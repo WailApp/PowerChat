@@ -11,6 +11,22 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
+const provider = new firebase.auth.GoogleAuthProvider();
+
+document.getElementById('google-login').addEventListener('click', function() {
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            // تم تسجيل الدخول بنجاح
+            const user = result.user;
+            console.log('User signed in:', user);
+            // هنا يمكنك إضافة الكود الخاص بتخزين معلومات المستخدم أو الانتقال إلى صفحة أخرى
+        })
+        .catch((error) => {
+            // حدث خطأ
+            console.error('Error during login:', error);
+        });
+});
+
 // DOM Elements
 const loginScreen = document.getElementById('login-screen');
 const chatScreen = document.getElementById('chat-screen');
